@@ -1,1 +1,1 @@
-export * from './TemplateName';
+export { TemplateName } from './TemplateName';
