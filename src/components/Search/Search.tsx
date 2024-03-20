@@ -12,16 +12,22 @@ export const Search: FC<SearchProps> = ({
                                           hasError,
                                           onSubmitHandler
                                         }) => {
-  const searchRef = useRef<HTMLFormElement>(null)
+  const searchRef = useRef<HTMLInputElement>(null)
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const text = searchRef.current?.value || ''
+    if (text) {
+      onSubmitHandler(text)
+      if (searchRef.current) {
+        searchRef.current.value = ''
+      }
+    }
   }
 
   return (
     <form
       onSubmit={(e) => handleSubmit(e)}
-      ref={searchRef}
       autoComplete="off"
     >
       <div className={styles.search}>
@@ -30,6 +36,7 @@ export const Search: FC<SearchProps> = ({
           <SearchIcon/>
         </label>
         <input
+          ref={searchRef}
           id="search"
           type="text" className={styles.textField}
           name="username"
