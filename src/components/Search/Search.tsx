@@ -19,8 +19,9 @@ export const Search: FC<SearchProps> = ({
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e: FormEvent<HTMLFormElement & FormFields>) => {
     e.preventDefault()
     const text = e.currentTarget.username.value
-    if (text) {
+    if (text.trim()) {
       console.log(text)
+      onSubmitHandler(text)
       e.currentTarget.reset()
     }
   }
